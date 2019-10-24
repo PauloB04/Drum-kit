@@ -1,10 +1,5 @@
+$("button.drum").click(handleFunction);
 
-var buttons = document.querySelectorAll(".drum");
-
-for(var btn=0; btn<buttons.length; btn++){
-  buttons[btn].addEventListener("click", handleFunction);
-
-}
 
 function handleFunction(){
   var btnHTML = this.innerHTML;
@@ -12,11 +7,12 @@ function handleFunction(){
   btnAnimation(btnHTML);
 }
 
-document.addEventListener("keydown", function(event){ //anonymous function
-  keyListener(event.key); //Adds event listener to the whole document and plays audio based on the presed key
-  btnAnimation(event.key); // adds "animation" to the currently pressed button
-}
-);
+
+$("body").keydown(function(event){ //anonymous function
+    keyListener(event.key); //Adds event listener to the whole document and plays audio based on the presed key
+    btnAnimation(event.key); // adds "animation" to the currently pressed button
+});
+
 
 function keyListener(key){
   switch (key) {
@@ -57,13 +53,13 @@ function keyListener(key){
     default:
 
   }
-
 }
 
+
 function btnAnimation(keyPressed){
-var activeBtn=  document.querySelector("."+keyPressed);
-activeBtn.classList.add("pressed");
+var activeBtn = $("."+keyPressed);
+activeBtn.addClass("pressed");
   setTimeout(function(){
-    activeBtn.classList.remove("pressed");
+    activeBtn.removeClass("pressed");
   }, 100);
 }
